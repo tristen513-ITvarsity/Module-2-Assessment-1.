@@ -5,140 +5,154 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pine City Zoo</title>
 
+<!-- ===== STYLES ===== -->
 <style>
-/* ===== GLOBAL ===== */
+/* ---------------- GLOBAL ---------------- */
 body {
     margin:0;
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(to bottom right, #f9f9f9, #e6f0ea);
-    color:#222;
-    transition:0.4s;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #222;
 }
-.dark-mode { background:#0a0a0a; color:#eee; }
+.dark-mode { background:#111; color:#eee; }
 
-/* ===== NAVBAR ===== */
-nav {
-    background: linear-gradient(135deg,#6fbf73,#2d593a);
+/* ---------------- NAVBAR ---------------- */
+header {
+    background: #4CAF50;
     color:white;
-    padding:20px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    padding:20px;
+    text-align:center;
     position: sticky;
     top:0;
-    z-index:20;
-    border-bottom: 2px solid gold;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
-nav h1 { font-size:28px; letter-spacing:1px; margin:0; text-shadow: 0 2px 6px rgba(0,0,0,0.3);}
 .dark-btn {
-    background:gold; color:#222;
-    border:none; padding:8px 16px;
-    border-radius:25px;
-    font-weight:bold; cursor:pointer;
-    transition:0.3s; box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    background:gold;
+    color:#222;
+    border:none;
+    padding:8px 20px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
 }
-.dark-btn:hover { background:#ffd700; transform:scale(1.05); }
+.dark-btn:hover { background:#ffd700; }
 
-/* ===== SEARCH ===== */
-.search-box { width:80%; margin:25px auto; }
+/* ---------------- SEARCH ---------------- */
+.search-box {
+    width:80%;
+    margin:20px auto;
+}
 .search-box input {
     width:100%;
-    padding:14px;
-    border-radius:25px;
-    border:2px solid #6fbf73;
-    font-size:17px;
-    transition:0.3s;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    padding:12px;
+    border-radius:20px;
+    border:2px solid #4CAF50;
+    font-size:16px;
 }
-.search-box input:focus {
-    border-color:#2d593a;
-    box-shadow:0 0 8px rgba(47, 86, 58,0.6);
+.info-note {
+    text-align:center;
+    font-size:14px;
+    color:#555;
+    margin-top:5px;
+    font-style:italic;
 }
-.info-note { text-align:center; font-size:14px; margin-top:-10px; color:#555; font-style:italic; }
 
-/* ===== ANIMAL GRID ===== */
+/* ---------------- ANIMAL GRID ---------------- */
+main {
+    padding:20px;
+}
 .animal-grid {
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-    padding:25px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 .animal-card {
-    background: rgba(255,255,255,0.9);
-    padding:20px;
-    border-radius:20px;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
     text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
     cursor:pointer;
-    transition:0.4s;
-    backdrop-filter: blur(5px);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.dark-mode .animal-card { background: rgba(30,30,30,0.9); }
 .animal-card:hover {
-    transform: translateY(-7px) scale(1.03);
-    box-shadow:0 12px 28px rgba(0,0,0,0.3);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:0 6px 18px rgba(0,0,0,0.2);
 }
 .animal-card img {
-    width:100%; height:180px;
-    object-fit:cover; border-radius:15px;
-    margin-bottom:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    transition:0.5s;
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:10px;
 }
-.animal-card img:hover { transform: scale(1.05); }
 
-/* ===== POPUP ===== */
-#overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(6px); z-index:10; }
+/* ---------------- POPUP ---------------- */
+#overlay {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    z-index:10;
+}
 #detailsBox {
     display:none;
-    background: linear-gradient(to bottom right, #ffffff, #dcebe1);
-    padding:30px;
-    border-radius:25px;
-    width:90%; max-width:700px;
-    position:fixed; top:50%; left:50%;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    width:90%;
+    max-width:600px;
+    position:fixed;
+    top:50%;
+    left:50%;
     transform:translate(-50%,-50%) scale(0.7);
-    box-shadow:0 20px 40px rgba(0,0,0,0.4);
-    animation:slideUp 0.5s forwards;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
     z-index:20;
-    overflow-y:auto; max-height:80vh;
+    overflow-y:auto;
+    max-height:80vh;
 }
-.dark-mode #detailsBox { background: linear-gradient(to bottom right, #111, #1a1a1a); color:#eee; }
-#detailsBox img { width:100%; border-radius:20px; margin-bottom:20px; transition:0.5s; }
-h2 { margin-top:0; font-family:'Playfair Display', serif; font-size:26px; letter-spacing:0.5px; }
-p, ul { margin-bottom:12px; line-height:1.6; font-size:16px; }
-ul { padding-left:22px; }
+#detailsBox img {
+    width:100%;
+    border-radius:12px;
+    margin-bottom:15px;
+}
 .close-btn {
-    margin-top:15px; padding:10px 20px;
-    background:gold; color:#222;
-    border:none; border-radius:25px; cursor:pointer;
-    font-weight:bold; transition:0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    margin-top:10px;
+    padding:8px 14px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
 }
-.close-btn:hover { background:#ffd700; transform:scale(1.05); }
-
-/* ===== ANIMATIONS ===== */
-@keyframes slideUp { to { transform: translate(-50%, -50%) scale(1); opacity:1; } }
+.close-btn:hover { background:#31753e; }
+h2 {margin-top:0;}
+p {margin-bottom:10px; line-height:1.5;}
+ul {padding-left:20px; margin-bottom:10px;}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav>
+<!-- ===== HEADER / NAVBAR ===== -->
+<header>
 <h1>Pine City Zoo</h1>
-<button class="dark-btn" onclick="document.body.classList.toggle('dark-mode')">Dark Mode</button>
-</nav>
+<button class="dark-btn" onclick="document.body.classList.toggle('dark-mode')">Toggle Dark Mode</button>
+</header>
 
-<!-- SEARCH -->
-<div class="search-box">
+<!-- ===== SEARCH ===== -->
+<section class="search-box">
 <input id="searchInput" placeholder="Search animals shown below…">
-</div>
 <p class="info-note">You can ONLY search for animals displayed on the homepage.</p>
+</section>
 
-<!-- ANIMAL GRID -->
+<!-- ===== ANIMAL GRID ===== -->
+<main>
 <div class="animal-grid" id="animalGrid"></div>
+</main>
 
-<!-- POPUP -->
+<!-- ===== POPUP ===== -->
 <div id="overlay" onclick="closeDetails()"></div>
 <div id="detailsBox">
 <img id="detailsImg">
@@ -156,126 +170,104 @@ ul { padding-left:22px; }
 <button class="close-btn" onclick="closeDetails()">Close</button>
 </div>
 
+<!-- ===== JAVASCRIPT ===== -->
 <script>
-// ===== ANIMALS DATA =====
+// ---------------- ANIMAL DATA ----------------
 const animals = [
-{name:"Lion", img:"lion.jpg", desc:"King of the jungle.", 
-habitat:"Savannahs, grasslands, and open woodlands in Africa.", 
-diet:"Carnivore – mainly antelopes, zebras, and other large prey.", 
-lifespan:"10–14 years in the wild, up to 20 in captivity.", 
-behavior:["Lives in prides consisting of females, offspring, and a few males.",
-"Can roar up to 8 km away.",
-"Social animals with complex interactions.",
-"Males defend territory."],
-more:"Known for hunting in coordinated groups and resting under trees in the heat."},
-
-{name:"Elephant", img:"elephant.jpg", desc:"Largest land mammal.", 
-habitat:"Grasslands, forests, and savannahs across Africa and Asia.", 
-diet:"Herbivore – grasses, fruits, bark, and roots.", 
-lifespan:"60–70 years.", 
-behavior:["Highly intelligent and social animals.",
-"Use trunks for drinking, feeding, and communication.",
-"Females live in matriarchal herds.",
-"Can communicate with low-frequency sounds."],
-more:"Elephants are excellent at problem solving and have strong memory skills."},
-
-{name:"Giraffe", img:"giraffe.jpg", desc:"Tallest animal.", 
-habitat:"Savannahs and open woodlands in Africa.", 
-diet:"Herbivore – leaves, especially from acacia trees.", 
-lifespan:"25 years in the wild.", 
-behavior:["Sleep only ~30 mins/day, usually standing.",
-"Have unique coat patterns for identification.",
-"Use long tongues to grab leaves.",
-"Can run up to 60 km/h."],
-more:"Giraffes are gentle browsers and have excellent vision for spotting predators."},
-
-{name:"Zebra", img:"zebra.jpg", desc:"Striped beauty.", 
-habitat:"Grasslands and savannahs in Africa.", 
-diet:"Herbivore – grasses, shoots, leaves.", 
-lifespan:"20–25 years.", 
-behavior:["Each zebra has unique stripes.",
-"Live in herds for protection against predators.",
-"Communicate through brays and facial expressions.",
-"Strong swimmers when needed."],
-more:"Zebras often migrate in large groups for safety and food availability."},
-
-{name:"Penguin", img:"penguin.jpg", desc:"Flightless swimmer.", 
-habitat:"Coastal areas, islands, and Antarctica.", 
-diet:"Carnivore – mainly fish, squid, and krill.", 
-lifespan:"15–20 years.", 
-behavior:["Excellent swimmers, using flippers for propulsion.",
-"Mates for life and shares parenting duties.",
-"Can withstand extremely cold temperatures.",
-"Communicate through calls and body language."],
-more:"Penguins huddle together to conserve heat and avoid predators."},
-
-{name:"Tiger", img:"tiger.jpg", desc:"Powerful predator.", 
-habitat:"Tropical forests, grasslands, and wetlands in Asia.", 
-diet:"Carnivore – deer, wild boar, and other medium-large prey.", 
-lifespan:"10–15 years in the wild.", 
-behavior:["Solitary hunters with excellent stealth and strength.",
-"Stripes help camouflage in forests.",
-"Strong swimmers and climbers.",
-"Communicate via scent markings and roars."],
-more:"Tigers are apex predators, crucial for ecosystem balance."},
-
-{name:"Monkey", img:"monkey.jpg", desc:"Playful climber.", 
-habitat:"Tropical rainforests and savannahs.", 
-diet:"Omnivore – fruits, seeds, insects, small animals.", 
-lifespan:"15–20 years.", 
-behavior:["Highly social, live in troops.",
-"Use tools and problem-solving skills.",
-"Can communicate with gestures and sounds.",
-"Active during the day, sleep in trees at night."],
-more:"Monkeys are intelligent and curious, often interacting with their environment."}
+    {
+        name:"Lion",
+        img:"lion.jpg",
+        desc:"King of the jungle.",
+        habitat:"Savannahs, grasslands, and open woodlands in Africa.",
+        diet:"Carnivore – mainly antelopes, zebras, and other large prey.",
+        lifespan:"10–14 years in the wild, up to 20 in captivity.",
+        behavior:["Lives in prides consisting of females, offspring, and a few males.",
+                  "Can roar up to 8 km away.",
+                  "Social animals with complex interactions.",
+                  "Males defend territory."],
+        more:"Known for hunting in coordinated groups and resting under trees in the heat."
+    },
+    {
+        name:"Elephant",
+        img:"elephant.jpg",
+        desc:"Largest land mammal.",
+        habitat:"Grasslands, forests, and savannahs across Africa and Asia.",
+        diet:"Herbivore – grasses, fruits, bark, and roots.",
+        lifespan:"60–70 years.",
+        behavior:["Highly intelligent and social animals.",
+                  "Use trunks for drinking, feeding, and communication.",
+                  "Females live in matriarchal herds.",
+                  "Can communicate with low-frequency sounds."],
+        more:"Elephants are excellent at problem solving and have strong memory skills."
+    },
+    {
+        name:"Giraffe",
+        img:"giraffe.jpg",
+        desc:"Tallest animal.",
+        habitat:"Savannahs and open woodlands in Africa.",
+        diet:"Herbivore – leaves, especially from acacia trees.",
+        lifespan:"25 years in the wild.",
+        behavior:["Sleep only ~30 mins/day, usually standing.",
+                  "Have unique coat patterns for identification.",
+                  "Use long tongues to grab leaves.",
+                  "Can run up to 60 km/h."],
+        more:"Giraffes are gentle browsers and have excellent vision for spotting predators."
+    }
+    // Add more animals here following the same structure
 ];
 
-// ===== LOAD CARDS =====
+// ---------------- GENERATE CARDS ----------------
 const grid = document.getElementById("animalGrid");
-animals.forEach(a=>{
-let card=document.createElement("div");
-card.className="animal-card";
-card.innerHTML=`<img src="${a.img}"><h3>${a.name}</h3><p>${a.desc}</p>`;
-card.onclick=()=>showDetails(a);
-grid.appendChild(card);
+animals.forEach(animal => {
+    // Create a div for each animal
+    const card = document.createElement("div");
+    card.className = "animal-card";
+    // Populate the card using template literals
+    card.innerHTML = `
+        <img src="${animal.img}" alt="${animal.name}">
+        <h3>${animal.name}</h3>
+        <p>${animal.desc}</p>
+    `;
+    // Add click event to show popup
+    card.addEventListener("click", () => showDetails(animal));
+    grid.appendChild(card);
 });
 
-// ===== SEARCH =====
-document.getElementById("searchInput").oninput = e => {
-const v = e.target.value.toLowerCase();
-document.querySelectorAll(".animal-card").forEach(card=>{
-const n = card.querySelector("h3").textContent.toLowerCase();
-card.style.display = n.includes(v) ? "block" : "none";
-});
-};
-
-// ===== POPUP =====
-function showDetails(a){
-document.getElementById("detailsImg").src=a.img;
-document.getElementById("detailsTitle").textContent=a.name;
-document.getElementById("detailsDesc").textContent=a.desc;
-document.getElementById("detailsHabitat").textContent=a.habitat;
-document.getElementById("detailsDiet").textContent=a.diet;
-document.getElementById("detailsLifespan").textContent=a.lifespan;
-
-// Populate behavior list
-const ul = document.getElementById("detailsBehavior");
-ul.innerHTML = "";
-a.behavior.forEach(b => {
-let li = document.createElement("li");
-li.textContent = b;
-ul.appendChild(li);
+// ---------------- SEARCH FUNCTIONALITY ----------------
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    document.querySelectorAll(".animal-card").forEach(card => {
+        const name = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = name.includes(query) ? "block" : "none";
+    });
 });
 
-document.getElementById("detailsMore").textContent=a.more;
-document.getElementById("overlay").style.display="block";
-document.getElementById("detailsBox").style.display="block";
-document.getElementById("detailsBox").scrollTop = 0;
+// ---------------- SHOW POPUP ----------------
+function showDetails(animal) {
+    document.getElementById("detailsImg").src = animal.img;
+    document.getElementById("detailsTitle").textContent = animal.name;
+    document.getElementById("detailsDesc").textContent = animal.desc;
+    document.getElementById("detailsHabitat").textContent = animal.habitat;
+    document.getElementById("detailsDiet").textContent = animal.diet;
+    document.getElementById("detailsLifespan").textContent = animal.lifespan;
+    const ul = document.getElementById("detailsBehavior");
+    ul.innerHTML = "";
+    animal.behavior.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+    });
+    document.getElementById("detailsMore").textContent = animal.more;
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("detailsBox").style.display = "block";
+    document.getElementById("detailsBox").scrollTop = 0;
 }
 
-function closeDetails(){
-document.getElementById("overlay").style.display="none";
-document.getElementById("detailsBox").style.display="none";
+// ---------------- CLOSE POPUP ----------------
+function closeDetails() {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("detailsBox").style.display = "none";
 }
 </script>
 
