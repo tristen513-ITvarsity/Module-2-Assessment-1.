@@ -6,362 +6,156 @@
 <title>Pine City Zoo</title>
 
 <style>
-/* ===================== GLOBAL STYLING ===================== */
-
+/* ===== GLOBAL ===== */
 body {
-    margin: 0;
-    font-family: "Poppins", Arial, sans-serif;
-    background: #f5f7fa;
-    color: #333;
-    transition: 0.3s;
+    margin:0;
+    font-family:"Poppins",Arial,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    transition:0.3s;
 }
+.dark-mode { background:#111; color:white; }
 
-.dark-mode {
-    background: #111;
-    color: white;
-}
-
-/* ===================== NAVBAR ===================== */
-
+/* ===== NAVBAR ===== */
 nav {
-    background: linear-gradient(135deg, #4faf60, #31753e);
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg,#4faf60,#31753e);
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
     position: sticky;
-    top: 0;
-    z-index: 20;
+    top:0;
+    z-index:20;
 }
+nav h1 { font-size:22px; margin:0; }
+nav ul { display:flex; gap:20px; list-style:none; margin:0; }
+nav li { cursor:pointer; font-weight:500; transition:0.3s; }
+nav li:hover { opacity:0.7; }
+.dark-btn { background:white; border:none; padding:6px 14px; border-radius:20px; cursor:pointer; font-weight:600; transition:0.3s; }
+.dark-btn:hover { background:#ddd; }
 
-nav h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
-}
-
-nav ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-}
-
-nav li {
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-nav li:hover {
-    opacity: 0.7;
-}
-
-/* Dark mode button */
-.dark-btn {
-    background: white;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s;
-}
-.dark-btn:hover { background: #ddd; }
-
-/* ===================== LOADING SCREEN ===================== */
-
-#loadingScreen {
-    position: fixed;
-    inset: 0;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 50;
-    animation: fadeOut 1s forwards;
-    animation-delay: 2.5s;
-}
-
-@keyframes fadeOut {
-    to { opacity: 0; visibility: hidden; }
-}
-
-.loader {
-    height: 80px;
-    width: 80px;
-    background-image: url('lion.jpg');
-    background-size: cover;
-    border-radius: 50%;
-    animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.15); }
-}
-
-#loadingScreen p {
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-/* ===================== SEARCH BOX ===================== */
-
-.search-box {
-    width: 85%;
-    margin: 20px auto;
-}
-
+/* ===== SEARCH ===== */
+.search-box { width:85%; margin:20px auto; }
 .search-box input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 2px solid #4faf60;
-    font-size: 16px;
-    transition: 0.3s;
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:2px solid #4faf60;
+    font-size:16px;
+    transition:0.3s;
 }
-
 .search-box input:focus {
-    border-color: #31753e;
-    box-shadow: 0 0 6px rgba(49,117,62,0.5);
+    border-color:#31753e;
+    box-shadow:0 0 6px rgba(49,117,62,0.5);
 }
+.info-note { text-align:center; font-size:14px; margin-top:-10px; color:#444; font-style:italic; }
 
-.info-note {
-    text-align: center;
-    font-size: 14px;
-    margin-top: -10px;
-    color: #444;
-    font-style: italic;
-}
-
-/* ===================== ANIMAL GRID ===================== */
-
-.animal-grid {
-    padding: 20px;
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-}
-
+/* ===== ANIMAL GRID ===== */
+.animal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:20px; }
 .animal-card {
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    cursor: pointer;
-    text-align: center;
-    transition: 0.3s;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    text-align:center;
+    transition:0.3s;
+    cursor:pointer;
 }
+.dark-mode .animal-card { background:#13232f; }
+.animal-card:hover { transform:translateY(-5px); box-shadow:0 6px 18px rgba(0,0,0,0.2); }
+.animal-card img { width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom:10px; }
 
-.animal-card:hover {
-    transform: translateY(-5px);
-}
-
-.animal-card img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-/* ===================== POPUP ===================== */
-
-#overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-    z-index: 10;
-}
-
-#detailsBox {
-    display: none;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    animation: slideUp 0.5s forwards;
-    z-index: 20;
-}
-
-@keyframes slideUp {
-    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-
-#detailsBox img {
-    width: 100%;
-    border-radius: 12px;
-}
-
-.close-btn {
-    margin-top: 10px;
-    padding: 8px 14px;
-    background: #31753e;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* ===================== FOOTER ===================== */
-
-footer {
-    margin-top: 40px;
-    background: #31753e;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 14px;
-}
-
+/* ===== POPUP ===== */
+#overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:10; }
+#detailsBox { display:none; background:white; padding:25px; border-radius:15px; width:90%; max-width:500px; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.8); box-shadow:0 10px 25px rgba(0,0,0,0.3); animation:slideUp 0.5s forwards; z-index:20; }
+.dark-mode #detailsBox { background:#13232f; }
+#detailsBox img { width:100%; border-radius:12px; margin-bottom:10px; }
+.close-btn { margin-top:10px; padding:8px 14px; background:#31753e; color:white; border:none; border-radius:10px; cursor:pointer; }
+.close-btn:hover {background:#24532a;}
+@keyframes slideUp { to { transform: translate(-50%, -50%) scale(1); opacity:1; } }
 </style>
 </head>
 
 <body>
 
-<!-- ===================== LOADING SCREEN ===================== -->
-<div id="loadingScreen">
-    <div class="loader"></div>
-    <p>Loading Pine City Zoo...</p>
-</div>
-
-<!-- ===================== NAVBAR ===================== -->
+<!-- ===== NAVBAR ===== -->
 <nav>
-    <h1>Pine City Zoo</h1>
-
-    <ul>
-        <li onclick="scrollToTop()">Home</li>
-        <li onclick="alert('Your zoo only has one page, sweetheart 💚')">Animals</li>
-        <li onclick="alert('You can add a contact page later ❤️')">Contact</li>
-        <li onclick="alert('This app was created by YOU 🦁✨')">About</li>
-    </ul>
-
-    <button class="dark-btn" onclick="toggleDark()">Dark Mode</button>
+<h1>Pine City Zoo</h1>
+<ul>
+<li onclick="window.location.href='index.html'">Home</li>
+<li onclick="window.location.href='animals.html'">Animals</li>
+<li onclick="window.location.href='contact.html'">Contact</li>
+<li onclick="window.location.href='about.html'">About</li>
+</ul>
+<button class="dark-btn" onclick="document.body.classList.toggle('dark-mode')">Dark Mode</button>
 </nav>
 
-<!-- ===================== SEARCH ===================== -->
+<!-- ===== SEARCH ===== -->
 <div class="search-box">
-    <input id="searchInput" placeholder="Search animals shown below...">
+<input id="searchInput" placeholder="Search animals shown below…">
 </div>
 <p class="info-note">You can ONLY search for animals displayed on the homepage.</p>
 
-<!-- ===================== ANIMAL GRID ===================== -->
+<!-- ===== ANIMAL GRID ===== -->
 <div class="animal-grid" id="animalGrid"></div>
 
-<!-- ===================== POPUP ===================== -->
+<!-- ===== POPUP ===== -->
 <div id="overlay" onclick="closeDetails()"></div>
-
 <div id="detailsBox">
-    <img id="detailsImg">
-    <h2 id="detailsTitle"></h2>
-    <p id="detailsDesc"></p>
-    <p id="detailsMore"></p>
-    <button class="close-btn" onclick="closeDetails()">Close</button>
+<img id="detailsImg">
+<h2 id="detailsTitle"></h2>
+<p id="detailsDesc"></p>
+<p id="detailsMore"></p>
+<button class="close-btn" onclick="closeDetails()">Close</button>
 </div>
 
-<!-- ===================== BACKGROUND MUSIC ===================== -->
-<audio id="bgMusic" loop>
-    <source src="zoo.mp3" type="audio/mpeg">
-</audio>
-
-<button onclick="toggleMusic()" style="
-position: fixed;
-bottom: 20px;
-right: 20px;
-background:#4faf60;
-color:white;
-border:none;
-padding:12px 18px;
-border-radius:12px;
-cursor:pointer;
-box-shadow:0 4px 10px rgba(0,0,0,0.3);
-">
-🎵 Music
-</button>
-
-<!-- ===================== SCRIPT ===================== -->
 <script>
-
+// ===== ANIMALS DATA =====
 const animals = [
-    {name:"Lion", img:"lion.jpg", desc:"The king of the jungle.", more:"Lions live in prides and can roar up to 8km away."},
-    {name:"Elephant", img:"elephant.jpg", desc:"Largest land mammal.", more:"They can remember paths and locations from 20 years ago."},
-    {name:"Giraffe", img:"giraffe.jpg", desc:"Tallest animal.", more:"Their neck has the same number of bones as humans."},
-    {name:"Zebra", img:"zebra.jpg", desc:"Striped beauty.", more:"Each zebra has a unique stripe pattern."},
-    {name:"Penguin", img:"penguin.jpg", desc:"Flightless swimmer.", more:"Penguins mate for life."},
-    {name:"Tiger", img:"tiger.jpg", desc:"Powerful predator.", more:"Tigers have striped skin too, not just fur."},
-    {name:"Monkey", img:"monkey.jpg", desc:"Playful tree climber.", more:"Monkeys can understand simple math."}
+{name:"Lion", img:"lion.jpg", desc:"King of the jungle.", more:"Lives in prides and can roar up to 8km away."},
+{name:"Elephant", img:"elephant.jpg", desc:"Largest land mammal.", more:"Has great memory, uses trunk for many tasks."},
+{name:"Giraffe", img:"giraffe.jpg", desc:"Tallest animal.", more:"Sleeps ~30 mins/day, long neck for leaves."},
+{name:"Zebra", img:"zebra.jpg", desc:"Striped beauty.", more:"Each zebra has unique stripes."},
+{name:"Penguin", img:"penguin.jpg", desc:"Flightless swimmer.", more:"Excellent swimmer, mates for life."},
+{name:"Tiger", img:"tiger.jpg", desc:"Powerful predator.", more:"Stripes exist on skin too."},
+{name:"Monkey", img:"monkey.jpg", desc:"Playful climber.", more:"Can understand simple tasks and communicate."}
 ];
 
-// Load cards
+// ===== LOAD CARDS =====
 const grid = document.getElementById("animalGrid");
 animals.forEach(a=>{
-    let card=document.createElement("div");
-    card.className="animal-card";
-    card.innerHTML=`
-        <img src="${a.img}">
-        <h3>${a.name}</h3>
-        <p>${a.desc}</p>
-    `;
-    card.onclick=()=>showDetails(a);
-    grid.appendChild(card);
+let card=document.createElement("div");
+card.className="animal-card";
+card.innerHTML=`<img src="${a.img}"><h3>${a.name}</h3><p>${a.desc}</p>`;
+card.onclick=()=>showDetails(a);
+grid.appendChild(card);
 });
 
-// Search
+// ===== SEARCH =====
 document.getElementById("searchInput").oninput = e => {
-    const v = e.target.value.toLowerCase();
-    document.querySelectorAll(".animal-card").forEach(card=>{
-        const n = card.querySelector("h3").textContent.toLowerCase();
-        card.style.display = n.includes(v) ? "block" : "none";
-    });
+const v = e.target.value.toLowerCase();
+document.querySelectorAll(".animal-card").forEach(card=>{
+const n = card.querySelector("h3").textContent.toLowerCase();
+card.style.display = n.includes(v) ? "block" : "none";
+});
 };
 
-// Popup
+// ===== POPUP =====
 function showDetails(a){
-    document.getElementById("detailsImg").src=a.img;
-    document.getElementById("detailsTitle").textContent=a.name;
-    document.getElementById("detailsDesc").textContent=a.desc;
-    document.getElementById("detailsMore").textContent=a.more;
-    document.getElementById("overlay").style.display="block";
-    document.getElementById("detailsBox").style.display="block";
+document.getElementById("detailsImg").src=a.img;
+document.getElementById("detailsTitle").textContent=a.name;
+document.getElementById("detailsDesc").textContent=a.desc;
+document.getElementById("detailsMore").textContent=a.more;
+document.getElementById("overlay").style.display="block";
+document.getElementById("detailsBox").style.display="block";
 }
-
 function closeDetails(){
-    document.getElementById("overlay").style.display="none";
-    document.getElementById("detailsBox").style.display="none";
+document.getElementById("overlay").style.display="none";
+document.getElementById("detailsBox").style.display="none";
 }
-
-// Dark Mode
-function toggleDark(){
-    document.body.classList.toggle("dark-mode");
-}
-
-// Music
-function toggleMusic(){
-    const music=document.getElementById("bgMusic");
-    if(music.paused) music.play();
-    else music.pause();
-}
-
-// Navbar home scroll
-function scrollToTop(){ window.scrollTo({top:0,behavior:"smooth"}); }
-
 </script>
-
-<!-- ===================== FOOTER ===================== -->
-<footer>
-    © 2026 Pine City Zoo — Created by Tristen Rampersad 🦁💚
-</footer>
 
 </body>
 </html>
