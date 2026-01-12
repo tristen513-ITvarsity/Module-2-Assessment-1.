@@ -4,6 +4,7 @@ body{
      font-family: Helvetica;
 }
 
+/*============= HEADER =============*/
 #header{
       position: fixed;
       top     : 0;
