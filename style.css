@@ -92,7 +92,9 @@ a.info-box{
       display         : block;
       margin          : auto;
       margin-top      : 12px;
-      padding         : 1px; 
+      padding         : 1px;
+      /* NEW: Required for positioning child elements absolutely */
+      position        : relative;
 }
 
 .info-box img{
@@ -101,54 +103,14 @@ a.info-box{
       float  : left;
 }
 
-
-.info-box h3{
-      padding : 0;
-      margin-bottom :0;
-      width : 90%;
-      color : #572800;
-}
-
-
-.info-box p{
-      margin  : 0;
-      padding : 0;
-      width   : 90%;
-      color   : 131313;
-}
-
-
 .info-box img.right{
-      float      : right;
-      margin-top : 25px;
-      height     40px; 
+      /* CHANGED: Use absolute positioning instead of float */
+      position : absolute;
+      right    : 10px;
+      top      : 50%;
+      /* CHANGED: Fixed the syntax error */
+      height   : 40px;
+      /* Centers the arrow vertically */
+      transform: translateY(-50%);
+      margin   : 0;
 }
-/*================ INFO BOX ================*/
-#info-box-full{
-      background-color : rgba(255, 255, 255, .8) ;
-      width   : 90%;
-      display : block;
-      margin  : auto;
-      margin-top : 12px;
-      padding    : 10px;
-}
-
-
-
-#info-box-full img{
-      width : 100%;
-}
-
-
-
-#info-box-full h3{
-      text-align : center;
-}
-
-
-
-
-
-
-
-
