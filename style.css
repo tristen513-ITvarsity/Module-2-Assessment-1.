@@ -45,8 +45,8 @@ body{
     text-align: center;
     text-decoration: none;
     padding-top: 12px;
-    
  }   
+
 /*============ MAIN-HOME ============*/ 
 
 #main-home{
@@ -82,14 +82,15 @@ body{
 #main{
     margin-top: 120px;
     background: url('map-blur.png');
-    background-repeat: repeat-y;
+    background-size: cover;        /* <-- Only change */
+    background-position: center;   /* <-- Only change */
+    background-repeat: no-repeat;  /* <-- Only change */
 }
 
 #content{
     padding-top: 1px;
     padding-bottom: 50px;
 }
-
 
 /*============ INFO BOX ============*/
 
@@ -222,77 +223,3 @@ textarea{
 }
 
 /*================================================*/
-
-
-
-
-
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-
-
