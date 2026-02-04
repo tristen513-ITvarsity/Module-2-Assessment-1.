@@ -77,14 +77,19 @@ body{
     padding-top: 12px;
 }    
 
-/*============ MAIN ============*/
+/*============ MAIN (ALL PAGES) ============*/
 
-#main{
+#main,
+#main-home,
+#main-animals,
+#main-places,
+#main-weather,
+#main-feedback {
     margin-top: 120px;
     background: url('map-blur.png');
-    background-size: cover;        /* <-- Only change */
-    background-position: center;   /* <-- Only change */
-    background-repeat: no-repeat;  /* <-- Only change */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #content{
